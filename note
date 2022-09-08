@@ -1,0 +1,93 @@
+user
+======
+id          name            email           password            image
+
+
+admin
+======
+id          name            email           password
+
+color
+=======
+id      slug        name
+1       feheo_red    red
+
+brand
+======
+id      slug        name
+
+category
+======
+id      slug        name
+1                    hat
+
+supplier
+======
+id      name        image       phone       description
+1        mgmg                    098            hat
+2        ayeaye                    098            hat
+
+product
+=========
+id        brand_id        category_id     supplier_id   name        image        description    buy_price    sell_price    discount_price    total_quantity
+
+
+product_review
+===============
+product_id        user_id        rating        review
+
+product_remove
+===============
+product_id    total_quantity    date
+
+product_add
+==============
+product_id        supplier_id        total_quantity        date
+1                    mgmg               100                  29
+1                    ayeaye              50                  29
+
+product_cart
+=============
+user_id        product_id        total_quantity
+1                1                    2
+
+order
+=======
+user_id        product_id   payment_sc    total_quantity      address      phone   order_status(pending,success,reject)
+1                    1        payment.png         2                                        success
+
+
+
+product_color
+--------------
+id      product_id      color_id
+
+
+income
+==========
+id    title        price        description
+1      wave        3000            wave many changer
+
+outcome
+=========
+id       title        price        description(nullable)
+1           bill        2000
+
+
+
+Laravel mix
+=============
+Firstly install laravel mix with "npm install laravel-mix" command from terminal
+second, create webpack.mix.js
+third, use npx mix watch (to complie react or css code to js)
+
+
+
+Git
+=========
+run command git init
+run ls -al
+run cd .git
+run ls -al
+run cd ..
+

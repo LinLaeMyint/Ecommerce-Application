@@ -73,7 +73,7 @@
                             @if ($d->id === $product->category_id)
                             selected
                             @endif
-                            value="{{$d->id}}">{{$d->name}}</option>
+                            value="{{$d->id}}">{{$d->en_name}}</option>
                         @endforeach
                     </select>
                 </div>

@@ -14,6 +14,7 @@
                 <th>Remain Quantity</th>
                 <th>Sell Price</th>
                 <th>Buy Price</th>
+                <th>is_Feature</th>
                 <th>Options</th>
             </tr>
         </thead>
@@ -25,7 +26,15 @@
                     <td>{{$d->total_quantity}}</td>
                     <td>{{$d->sell_price}}</td>
                     <td>{{$d->buy_price}}</td>
+                    <td>{{$d->isFeature}}</td>
                     <td>
+                        <a href="{{url('/admin/set-feature/'.$d->id.'?feature=yes')}}" class="btn btn-outline-warning">
+                            <i class="fas fa-heart"></i>
+                        </a>
+                        <a href="{{url('/admin/remove-feature/'.$d->id.'?feature=no')}}" class="btn btn-outline-warning">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                        |
                         <a href="{{route('product.edit',$d->id)}}" class="btn btn-primary">
                             <i class="fa fa-edit"></i>
                         </a>
@@ -36,8 +45,8 @@
                             <i class="fa fa-trash"></i>
                         </button>
                         |
-                        <a href="" class="btn btn-outline-success">Add Product</a>
-                        <a href="" class="btn btn-outline-danger">Remove Product</a>
+                        <a href="{{route('product-add.create').'?pid='.$d->id}}" class="btn btn-outline-success">Add Product</a>
+                        <a href="{{route('product-remove.create').'?pid='.$d->id}}" class="btn btn-outline-danger">Remove Product</a>
                     </form>
 
                     </td>

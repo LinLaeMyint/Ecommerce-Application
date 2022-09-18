@@ -9,6 +9,7 @@ use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductAdd;
 use App\Models\Supplier;
+use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -69,6 +70,7 @@ class ProductController extends Controller
 
         //store in product table
         $product=Product::create([
+            'slug'=>uniqid().$request->name,
             'brand_id'=>$request->brand_id,
             'category_id'=>$request->category_id,
             'supplier_id'=>$request->supplier_id,
@@ -181,5 +183,19 @@ class ProductController extends Controller
         $p->color()->sync([]);
         $product->delete();
         return redirect()->back()->with('success','Product Removed Successfully');
+    }
+    public function setFeature($id){
+        $feature=request()->feature;
+       Product::where('id',$id)->update([
+        'isFeature'=>$feature
+       ]);
+       return redirect()->back()->with('success','Product Feature Updated');
+    }
+    public function removeFeature($id){
+        $feature=request()->feature;
+       Product::where('id',$id)->update([
+        'isFeature'=>$feature
+       ]);
+       return redirect()->back()->with('success','Product Feature removed');
     }
 }

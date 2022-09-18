@@ -91,3 +91,16 @@ run cd .git
 run ls -al
 run cd ..
 
+
+create new repository
+git remote add origin https://github.com/LinLaeMyint/Ecommerce-Application.git
+git branch -M main
+git add . (to track all the codes in this project)
+git commit -m "Laravel Ecommerce" (to message why this edit)
+git push origin main (upload commit to main branch)
+
+
+two ways to clone git code
+-----------------------------
+1.Download zip
+2.run command => git clone https://github.com/LinLaeMyint/Ecommerce-Application

@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Outcome extends Model
 {
+
     use HasFactory;
+    protected $fillable=['title','price','description'];
+
 }

@@ -42,9 +42,33 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{route('product.index')}}">
                   <i class="ni ni-planet text-orange"></i>
                   <span class="nav-link-text">Products</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('product-add.index')}}">
+                  <i class="ni ni-planet text-orange"></i>
+                  <span class="nav-link-text">Products Purchase</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('product-remove.index')}}">
+                  <i class="ni ni-planet text-orange"></i>
+                  <span class="nav-link-text">Products Cancel</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('income.index')}}">
+                  <i class="ni ni-planet text-orange"></i>
+                  <span class="nav-link-text">Income</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{route('outcome.index')}}">
+                  <i class="ni ni-planet text-orange"></i>
+                  <span class="nav-link-text">Outcome</span>
                 </a>
               </li>
           </ul>

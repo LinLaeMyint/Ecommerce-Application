@@ -80,7 +80,7 @@
                     <label for="">Choose Category</label>
                     <select name="category_id" id="category">
                         @foreach ($category as $d)
-                            <option value="{{$d->id}}">{{$d->name}}</option>
+                            <option value="{{$d->id}}">{{$d->en_name}}</option>
                         @endforeach
                     </select>
                 </div>

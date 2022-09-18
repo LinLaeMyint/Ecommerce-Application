@@ -15,6 +15,7 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('slug');
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('supplier_id');
@@ -25,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->integer('sell_price');
             $table->integer('discount_price');
             $table->integer('total_quantity');
+            $table->enum('isFeature',['yes','no'])->default('no');
             $table->integer('view_count')->default(0);
             $table->timestamps();
         });

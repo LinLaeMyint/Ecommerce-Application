@@ -10,6 +10,7 @@ use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -39,13 +40,25 @@ class DatabaseSeeder extends Seeder
         }
 
         //category
-        $category=['Electronic','Shirt','Accessory','Hat','Mobile Phone'];
-        foreach($category as $c){
-            Category::create([
-                'slug' => uniqid().$c,
-                'name' => $c
-            ]);
-        }
+        Category::create([
+            'slug'=>Str::slug('computer'),
+            'en_name'=>'computer',
+            'mm_name'=>'ကွန်ပျူတာ',
+            'image'=>'63184aeb214faWork-From-Home-WhatsApp-Group.jpg',
+        ]);
+        Category::create([
+            'slug'=>Str::slug('mobile-phone'),
+            'en_name'=>'Mobile Phone',
+            'mm_name'=>'မိုဘိုင်းဖုန်း',
+            'image'=>'631b34e770fddvivo.png',
+        ]);
+        // $category=['Electronic','Shirt','Accessory','Hat','Mobile Phone'];
+        // foreach($category as $c){
+        //     Category::create([
+        //         'slug' => uniqid().$c,
+        //         'name' => $c
+        //     ]);
+        // }
 
         //user
         User::create([

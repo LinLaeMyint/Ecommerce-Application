@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable=['brand_id','category_id','supplier_id','name','image','description','buy_price'
+    protected $fillable=['slug','brand_id','category_id','supplier_id','name','image','description','buy_price'
     ,'sell_price','discount_price','total_quantity','view_count'];
+    protected $appends=['image_url'];
+    public function getImageUrlAttribute(){
+        return asset('/images').'/'. $this->image;}
 
     public function brand(){
         return $this->belongsTo(Brand::class);

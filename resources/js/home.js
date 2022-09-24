@@ -30,7 +30,7 @@ const App=()=>{
           <div className="d-flex justify-content-around align-items-center p-3">
             <img src={c.image_url} width={100} alt="" />
             <div className="text-center">
-              <p className="fs-2">{c.en_name}</p>
+              <p className="fs-2">{lang==="mm"? c.mm_name : c.en_name}</p>
               <small className="">{c.product_count} items</small>
             </div>
           </div>

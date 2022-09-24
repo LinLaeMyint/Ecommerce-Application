@@ -71,6 +71,12 @@
                   <span class="nav-link-text">Outcome</span>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('admin/order')}}">
+                  <i class="ni ni-planet text-orange"></i>
+                  <span class="nav-link-text">Orders</span>
+                </a>
+              </li>
           </ul>
           <!-- Divider -->
           <hr class="my-3">

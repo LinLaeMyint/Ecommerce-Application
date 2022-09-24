@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
@@ -38,11 +39,19 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
+            'en_name'=>'required',
+            'mm_name'=>'required',
+            'image'=>'required'
            ]);
+            //image uploaded requested
+       $file=$request->file('image');
+       $file_name=uniqid().$file->getClientOriginalName();
+       $file->move(public_path('images'),$file_name);
            Category::create([
-            'slug'=>uniqid().$request->name,
-            'name'=>$request->name,
+            'slug'=>uniqid().$request->en_name,
+            'en_name'=>$request->en_name,
+            'mm_name'=>$request->mm_name,
+            'image'=>$file_name
            ]);
            return redirect()->back()->with('success','Category Created Success');
 
@@ -84,14 +93,29 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name'=>'required',
+            'en_name'=>'required',
+            'mm_name'=>'required',
            ]);
+
            $data=Category::find($id);
            if(!$data){
             return redirect()->back()->with('error','Category Not Found');
         }
+        $file=$request->file('image');
+        if($file){
+         File::delete(public_path('/images').'/'.$data->image);
+             //image uploaded requested
+             $file=$request->file('image');
+             $file_name=uniqid().$file->getClientOriginalName();
+             $file->move(public_path('images'),$file_name);
+        }else{
+         $file_name=$data->image;
+        }
+
         Category::where('id',$id)->update([
-            'name'=>$request->name,
+            'en_name'=>$request->en_name,
+            'mm_name'=>$request->mm_name,
+            'image'=>$file_name
           ]);
           return redirect()->back()->with('success','Category Updated Successfully');
 
@@ -106,6 +130,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $data=Category::find($id);
+        File::delete(public_path('/images').'/'.$data->image);
         Category::where('id',$id)->delete();
         return redirect()->back()->with('success','Category removed successfully');
 

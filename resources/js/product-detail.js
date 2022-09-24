@@ -2,12 +2,16 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import reactDom from 'react-dom/client'
 import Loader from './Component/Loader';
+import Rating from 'react-star-ratings';
 
 const App=()=>{
     const [loader,setLoader]=useState(true);
     const [product,setProduct]=useState({});
     const [review,setReview]=useState([]);
     const [cartLoader,setCartLoader]=useState(false);
+    //for review
+    const [rating,setRating]=useState(0);
+    const [rev,setRev]=useState('');
     useEffect(()=>{
         axios.get("/api/product-detail/"+product_slug).then(d=>{
             setProduct(d.data);
@@ -27,6 +31,25 @@ const App=()=>{
         });
 
     };
+    //change rating
+    const changeRating=(newRateNo)=>{
+        setRating(newRateNo);
+    }
+    //submit review
+    const submitReview=()=>{
+        var frmData=new FormData();
+        frmData.append("rating",rating);
+        frmData.append("review",rev);
+        frmData.append("product_id",product.id);
+
+        axios.post("/api/make-review",frmData).then(({data})=>{
+            setReview([...review,data]);
+            showToast("Thank You For Your Review");
+            setRating(0);
+            setRev('');
+        })
+
+    }
     return(
         <>
         {loader && <Loader />}
@@ -83,107 +106,61 @@ const App=()=>{
             <hr />
             <div className="col-12" style={{ marginTop: 100 }}>
               {/* loop review */}
-              <div className="review">
+              {review.map(r=>(
+                <div className="review" key={r.id}>
                 <div className="card p-3">
                   <div className="row">
                     <div className="col-md-2">
                       <div className="d-flex justify-content-between">
                         <img
-                          className="w-100 rounded-circle"
-                          src="assets/images/user.jpeg"
-                          alt=""
-                        />
+                          className="w-100 rounded-circle" src={r.user.image_url} />
                       </div>
                     </div>
                     <div className="col-md-10">
                       <div className="rating">
-                        <small className="far fa-star text-warning" />
-                        <small className="far fa-star text-warning" />
-                        <small className="far fa-star" />
-                        <small className="far fa-star" />
-                        <small className="far fa-star" />
+                        <Rating
+                         rating={r.rating}
+                         starRatedColor="red"
+                         numberOfStars={5}
+                         name='rating'
+                         starDimension='15px'
+                        />
                       </div>
                       <div className="name">
-                        <b>Myo Thant Kyaw</b>
+                        <b>{r.user.name}</b>
                       </div>
                       <div className="mt-3">
                         <small>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
-                          ipsam vero ex fugit maiores officiis sit fuga nihil! Maiores
-                          laboriosam consequuntur explicabo vitae dolorum exercitationem
-                          optio, veritatis nulla ab expedita.
+                         {r.review}
                         </small>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="review">
-                <div className="card p-3">
-                  <div className="row">
-                    <div className="col-md-2">
-                      <div className="d-flex justify-content-between">
-                        <img
-                          className="w-100 rounded-circle"
-                          src="assets/images/user.jpeg"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <div className="col-md-10">
-                      <div className="rating">
-                        <small className="far fa-star text-warning" />
-                        <small className="far fa-star text-warning" />
-                        <small className="far fa-star" />
-                        <small className="far fa-star" />
-                        <small className="far fa-star" />
-                      </div>
-                      <div className="name">
-                        <b>Myo Thant Kyaw</b>
-                      </div>
-                      <div className="mt-3">
-                        <small>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
-                          ipsam vero ex fugit maiores officiis sit fuga nihil! Maiores
-                          laboriosam consequuntur explicabo vitae dolorum exercitationem
-                          optio, veritatis nulla ab expedita.
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
+
+
               <div className="add-review mt-5">
                 <h4>Make Review</h4>
                 <div className="">
-                  <small className="far fa-star" />
-                  |
-                  <small className="far fa-star" />
-                  <small className="far fa-star" />
-                  |
-                  <small className="far fa-star" />
-                  <small className="far fa-star" />
-                  <small className="far fa-star" />
-                  |
-                  <small className="far fa-star" />
-                  <small className="far fa-star" />
-                  <small className="far fa-star" />
-                  <small className="far fa-star" />
-                  |
-                  <small className="far fa-star" />
-                  <small className="far fa-star" />
-                  <small className="far fa-star" />
-                  <small className="far fa-star" />
-                  <small className="far fa-star" />
+                  <Rating
+                   rating={rating}
+                   starRatedColor="red"
+                   changeRating={changeRating}
+                   numberOfStars={5}
+                   name='rating'
+                  />
                 </div>
                 <div>
                   <textarea
                     className="form-control"
                     rows={5}
                     placeholder="enter review"
-                    defaultValue={""}
-                  />
-                  <button className="btn btn-dark float-right mt-3">Review</button>
+                    value={rev}
+                    onChange={(e)=>setRev(e.target.value)}
+s                  />
+                  <button onClick={()=>submitReview()} className="btn btn-dark float-right mt-3">Review</button>
                 </div>
               </div>
             </div>

@@ -36,7 +36,7 @@
                         <a href="" class="text-white btn btn btn-outline-dark ">Hot Deal</a>
                         <a href="" class="text-white btn btn btn-outline-dark ">About</a>
 
-                        <a href="#" class="btn btn-outline-dark cart-container">
+                        <a href={{url('/profile')}} class="btn btn-outline-dark cart-container">
 
                             <i class="fas text-danger  fa-shopping-basket fs-1"></i>
                             <span class="cart-no bg-danger text-white" id="cartContainer">{{$cart_count}}</span>
@@ -73,8 +73,8 @@
                                 Language
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">မြန်မာ</a>
-                                <a class="dropdown-item" href="#">English</a>
+                                <a class="dropdown-item" href="{{url('/locale/mm')}}">မြန်မာ</a>
+                                <a class="dropdown-item" href="{{url('/locale/en')}}">English</a>
                             </div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="mt-5 text-center p-5">
-            <h1 class="text-center text-white">Welcome From M-Commerce</h1>
+            <h1 class="text-center text-white">{{__('home.title')}}</h1>
             <small class="">M-Commerce is Develop by mmcoder.com and for educational purpose...</small>
 
             <div class="mt-5">
@@ -139,6 +139,7 @@ const showToast=(message)=>{
             position: 'center',
             }).showToast();
 }
+const lang="{{app()->getLocale()}}"
     </script>
 @yield('script')
 </body>

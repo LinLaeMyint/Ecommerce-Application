@@ -37183,7 +37183,7 @@ var App = function App() {
                     className: "text-center",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
                       className: "fs-2",
-                      children: c.en_name
+                      children: lang === "mm" ? c.mm_name : c.en_name
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("small", {
                       className: "",
                       children: [c.product_count, " items"]

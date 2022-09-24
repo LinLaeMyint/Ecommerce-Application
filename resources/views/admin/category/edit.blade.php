@@ -10,8 +10,17 @@
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label>Enter Name</label>
-            <input type="text" name="name" class="form-control" value="{{$data->name}}">
+            <label>Enter English Name</label>
+            <input type="text" name="en_name" class="form-control" value="{{$data->en_name}}">
+        </div>
+        <div class="form-group">
+            <label>Enter Myanmar Name</label>
+            <input type="text" name="mm_name" class="form-control" value="{{$data->mm_name}}">
+        </div>
+        <div class="form-group">
+            <label>Choose Image</label>
+            <input type="file" name="image" class="form-control">
+            <img src="{{asset('/images/'.$data->image)}}" width="200" class="img-thumbnail" alt="">
         </div>
         <input type="submit" value="Update" class="btn btn-dark">
     </form>

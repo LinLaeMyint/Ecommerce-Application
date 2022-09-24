@@ -21,6 +21,11 @@ class User extends Authenticatable
         'password',
         'image'
     ];
+    protected $hidden=['password'];
+    protected $appends=['image_url'];
+    public function getImageUrlAttribute(){
+        return asset('/images/').'/'.$this->image;
+    }
     public function review(){
         return $this->hasMany(ProductReview::class);
     }

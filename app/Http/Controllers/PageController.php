@@ -63,4 +63,7 @@ class PageController extends Controller
         $category=Category::withCount('product')->get();
         return view('product-detail',compact('category','slug'));
     }
+    public function profile(){
+        return view('profile');
+    }
 }
